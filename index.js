@@ -4,7 +4,7 @@ const port = 3000
 
 function calculateSum(counter) {
   var sum  = 0;
-  for (let i=0; i<counter; i++) {
+  for (let i=0; i<=counter; i++) {
     sum += i;
     
   }
@@ -12,13 +12,21 @@ function calculateSum(counter) {
 }
 
 
-function hanldeFirstRequest(req, res) {
-  var calculatedSum = calculateSum(100);
+function hanldeFirstRequest(req, res){
+  var counter = req.query.counter;
+  var calculatedSum = calculateSum(counter);
   console.log(calculatedSum);
   var answer = "the sum is " + calculatedSum;
   res.send(answer);
+  
 }
-app.get('/', hanldeFirstRequest)
+
+function createUser(req, res) {
+  res.send("hello world")
+}
+
+app.get('/handleSum', hanldeFirstRequest)
+app.post('/createUser', createUser)
 
 function started() {
   console.log(`Example app listening on port ${port}`)
